@@ -1,5 +1,5 @@
 ---
-- hosts: backup
+- hosts: pi
 
   roles:
     - common

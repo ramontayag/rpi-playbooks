@@ -1,0 +1,4 @@
+---
+- name: Copy network interfaces config
+  template: src=network_interfaces.j2 dest=/etc/network/interfaces
+  sudo: True

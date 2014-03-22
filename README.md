@@ -20,9 +20,18 @@ In your Pi:
 
 ## Ansible
 
-Run the specific role and inventory you want:
+Run the specific role you want. Remember:
 
-    ansible-playbook backup.yml -i backup
+- Copy `pi.sample` to `pi` and edit the ip addresses. If you have multiple Pis you want to configure now, you may add them as extra lines
+- In the following commands, replace `ip.address` with the Pi's ip address
+
+To make the Pi a BTSync back up server:
+
+    ansible-playbook backup.yml -i pi
+
+You want wifi?
+
+    ansible-playbook wifi.yml -i pi --extra-vars="ssid_name=yourssid ssid_password=yourssidpassword"
 
 # Others
 
