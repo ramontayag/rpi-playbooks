@@ -1,0 +1,8 @@
+---
+ansible_ssh_user: pi
+home_dir: /home/{{ansible_ssh_user}}
+btsync_dir: "{{home_dir}}/local/btsync"
+btsync_pid: "{{btsync_dir}}/btsync.pid"
+btsync_storage_dir: "{{home_dir}}/.sync"
+btsync_password: quickredhatforcex
+btsync_conf: "{{btsync_dir}}/btsync.conf"

@@ -1,0 +1,46 @@
+---
+- name: install required apt packages
+  apt: name={{item}} state=present
+  sudo: True
+  with_items:
+    - tmux
+    - zsh
+    - git
+
+- name: clone prezto
+  shell: git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto" creates="{{home_dir}}/.zprezto"
+
+- name: zsh facts
+  shell: 'echo $SHELL'
+  register: default_shell
+  changed_when: False
+  sudo: no
+
+- name: make zsh default
+  user: name={{ansible_ssh_user}} shell=/bin/zsh
+  sudo: True
+
+- name: copy zsh files
+  shell: ln -s {{home_dir}}/.zprezto/runcoms/{{item}} {{home_dir}}/.{{item}} creates={{home_dir}}/.{{item}}
+  with_items:
+    - zlogin
+    - zlogout
+    - zpreztorc
+    - zprofile
+    - zshenv
+    - zshrc
+
+- name: copy tmux config
+  copy: "src=tmux.conf dest={{home_dir}}/.tmux.conf"
+
+- name: copy zshrc
+  copy: src=zshrc dest={{home_dir}}/.zshrc
+
+- name: Create .zsh.after dir
+  shell: mkdir {{home_dir}}/.zsh.after creates={{home_dir}}/.zsh.after
+
+- name: Copy vim mode
+  copy: src=vim-mode.zsh dest={{home_dir}}/.zsh.after/vim-mode.zsh
+
+- name: Create .zsh.after for hooks
+  shell: "mkdir {{home_dir}}/.zsh.after creates={{home_dir}}/.zsh.after"

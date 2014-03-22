@@ -1,0 +1,7 @@
+---
+- hosts: backup
+
+  roles:
+    - common
+    - zsh
+    - btsync

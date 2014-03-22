@@ -1,0 +1,22 @@
+---
+- name: update apt cache
+  apt: update_cache=yes
+  sudo: True
+
+- name: upgrade apt packages
+  apt: upgrade=yes
+  sudo: True
+
+- name: Install required packages
+  apt: name={{item}} state=present
+  sudo: True
+  with_items:
+    - tmux
+    - htop
+    - vim
+    - git-core
+    - raspberrypi-bootloader
+    - monit
+
+- name: Start monit on boot
+  service: name=monit runlevel=3,4,5 state=started
