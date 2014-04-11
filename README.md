@@ -33,6 +33,10 @@ You want wifi?
 
     ansible-playbook wifi.yml -i pi --extra-vars="ssid_name=yourssid ssid_password=yourssidpassword"
 
+You want to dump the public ip address in `~/about` (you can create a BTSync folder for this to find out what the IP of your pi is):
+
+    ansible-playbook port_forwarded.yml -i pi
+
 # Others
 
 ## USB Auto Mount
