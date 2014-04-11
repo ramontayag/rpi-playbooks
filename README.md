@@ -27,7 +27,7 @@ Run the specific role you want. Remember:
 
 To make the Pi a BTSync back up server:
 
-    ansible-playbook backup.yml -i pi
+    ansible-playbook backup.yml -i pi --extra-vars="btsync_password=mybtsyncpassword"
 
 You want wifi?
 
