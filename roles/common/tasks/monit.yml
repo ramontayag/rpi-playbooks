@@ -1,0 +1,3 @@
+---
+- name: Start monit on boot
+  service: name=monit runlevel=3,4,5 state=started
