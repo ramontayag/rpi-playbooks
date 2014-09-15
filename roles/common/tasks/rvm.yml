@@ -1,0 +1,11 @@
+---
+- name: install RVM
+  shell: "curl -sSL https://get.rvm.io | bash -s stable creates={{rvm_dir}}"
+
+- name: install Rubies
+  shell: "{{rvm}} install {{item}} creates={{rvm_dir}}/rubies/{{item}}"
+  with_items:
+    - ruby-2.1.1
+
+- name: Hook into zsh
+  copy: src=rvm.zsh dest={{home_dir}}/.zsh.after/rvm.zsh
