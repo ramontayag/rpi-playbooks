@@ -6,3 +6,5 @@ btsync_pid: "{{btsync_dir}}/btsync.pid"
 btsync_storage_dir: "{{home_dir}}/.sync"
 btsync_password: quickredhatforcex
 btsync_conf: "{{btsync_dir}}/btsync.conf"
+rvm_dir: "{{home_dir}}/.rvm"
+rvm: "{{rvm_dir}}/bin/rvm"
