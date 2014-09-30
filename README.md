@@ -5,7 +5,7 @@
 - Change the inventory IP addresses to your pi address
 - Add your SSH key to the pi (On OSX? You may need `brew install ssh-copy-id`):
 
-    ssh-copy-id pi@ip.address
+    ssh-copy-id -i ~/.ssh/id_rsa.pub pi@ip.address
 
 ## Configure Pi
 
