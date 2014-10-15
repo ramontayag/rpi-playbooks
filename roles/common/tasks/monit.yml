@@ -1,3 +1,9 @@
 ---
+- name: Copy monit config
+  copy: src=monitrc dest=/etc/monit/monitrc
+  sudo: True
+  notify:
+    - reload monit
+
 - name: Start monit on boot
   service: name=monit runlevel=3,4,5 state=started
