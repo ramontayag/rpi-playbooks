@@ -33,9 +33,9 @@ You want wifi?
 
     ansible-playbook wifi.yml -i pi --extra-vars="ssid_name=yourssid ssid_password=yourssidpassword"
 
-You want to dump the public ip address in `~/about` (you can create a BTSync folder for this to find out what the IP of your pi is):
+Want to install NoIP (no-ip.com)?
 
-    ansible-playbook port_forwarded.yml -i pi
+    ansible-playbook noip.yml -i pi --extra-vars="noip_username=yourusername noip_password=yournoippassword"
 
 # Others
 

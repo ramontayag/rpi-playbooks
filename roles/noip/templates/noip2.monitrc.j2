@@ -1,0 +1,5 @@
+check process noip with pidfile {{noip_pid}}
+  start program = "/bin/bash -c '{{noip_initd}} start'"
+  stop program = "/bin/bash -c '/bin/kill -9 `cat {{noip_pid}}`'"
+  if cpu is greater than 90% for 2 cycles then alert
+  if cpu > 95% for 30 cycles then restart

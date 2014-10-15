@@ -1,9 +1,9 @@
 ---
 - name: Copy install BTSync script
-  copy: src=install.sh dest={{home_dir}}/install.sh mode=0744
+  copy: src=install.sh dest={{home_dir}}/btsync_install.sh mode=0744
 
 - name: Download and extract BTSync
-  shell: ./install.sh creates={{btsync_dir}}
+  shell: ./btsync_install.sh creates={{btsync_dir}}
 
 - name: Ensure btsync storage path exists
   file: path={{btsync_storage_dir}} state=directory

@@ -1,0 +1,12 @@
+cd {{home_dir}}
+wget http://www.no-ip.com/client/linux/noip-duc-linux.tar.gz
+tar zxf noip-duc-linux.tar.gz
+cd {{noip_dir}}
+
+/usr/bin/expect <<END_SCRIPT
+spawn make install
+expect "Please enter the login/email*" { send "{{noip_username}}\r" }
+expect "Please enter the password for user*" { send "{{noip_password}}\r" }
+expect "Please enter an update interval*" { send "30\r" }
+expect "Do you wish to run something at successful update*" {send "N\r" }
+END_SCRIPT

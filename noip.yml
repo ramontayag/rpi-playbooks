@@ -1,0 +1,5 @@
+---
+- hosts: pi
+
+  roles:
+    - noip

@@ -17,3 +17,4 @@
     - git-core
     - raspberrypi-bootloader
     - monit
+    - expect

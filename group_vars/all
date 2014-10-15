@@ -8,3 +8,8 @@ btsync_password: quickredhatforcex
 btsync_conf: "{{btsync_dir}}/btsync.conf"
 rvm_dir: "{{home_dir}}/.rvm"
 rvm: "{{rvm_dir}}/bin/rvm"
+noip_dir: "{{home_dir}}/noip-2.1.9-1"
+noip: "/usr/local/bin/noip2"
+noip_conf: /usr/local/etc/no-ip2.conf
+noip_pid: /var/run/noip2.pid
+noip_initd: /etc/init.d/noip

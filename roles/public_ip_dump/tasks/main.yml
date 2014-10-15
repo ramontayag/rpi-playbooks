@@ -1,6 +1,0 @@
----
-- name: Copy script to run
-  copy: src=public_ip_dump.sh dest={{home_dir}}/scripts/public_ip_dump.sh mode=0744
-
-- name: Run script
-  cron: name="Dump public ip" minute="1" job="{{home_dir}}/scripts/public_ip_dump.sh"
