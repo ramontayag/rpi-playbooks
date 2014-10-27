@@ -33,6 +33,10 @@ To make the Pi a BTSync back up server:
 
     ansible-playbook backup.yml -i pi --extra-vars="btsync_password=mybtsyncpassword"
 
+Want Ruby and RVM?
+
+    ansible-playbook ruby.yml -i pi
+
 You want wifi?
 
     ansible-playbook wifi.yml -i pi --extra-vars="ssid_name=yourssid ssid_password=yourssidpassword"
