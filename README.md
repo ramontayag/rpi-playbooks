@@ -25,6 +25,10 @@ Run the specific role you want. Remember:
 - Copy `pi.sample` to `pi` and edit the ip addresses. If you have multiple Pis you want to configure now, you may add them as extra lines
 - In the following commands, replace `ip.address` with the Pi's ip address
 
+First, we have to install the things it needs for the recipes to follow:
+
+    ansible-playbook setup.yml -i pi
+
 To make the Pi a BTSync back up server:
 
     ansible-playbook backup.yml -i pi --extra-vars="btsync_password=mybtsyncpassword"

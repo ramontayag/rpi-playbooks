@@ -1,0 +1,7 @@
+---
+- hosts: pi
+
+  roles:
+    - common
+    - zsh
+    - rvm
