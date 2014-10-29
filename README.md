@@ -45,6 +45,10 @@ Want to install NoIP (no-ip.com)?
 
     ansible-playbook noip.yml -i pi --extra-vars="noip_username=yourusername noip_password=yournoippassword"
 
+Want electrum?
+
+    ansible-playbook electrum.yml -i pi
+
 # Others
 
 ## USB Auto Mount

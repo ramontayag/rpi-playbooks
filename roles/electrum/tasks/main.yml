@@ -1,0 +1,11 @@
+---
+- name: Install Electrum deps
+  apt: name={{item}} state=present
+  sudo: True
+  with_items:
+    - python-qt4
+    - python-pip
+
+- name: Install Electrum
+  pip: name='https://download.electrum.org/Electrum-1.9.8.tar.gz#md5=e3918fec0254267f08e41a1fb8691382'
+  sudo: True
