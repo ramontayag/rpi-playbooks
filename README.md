@@ -63,4 +63,4 @@ You should create the directory where you want it to be mounted: `sudo mkdir /me
 
 ## Format disk
 
-If you need format the drive, see [this](http://www.ehow.com/how_5853059_format-linux-disk.html). I followed the format portion only, not the mount.
+If you need format the drive, see [this](http://superuser.com/questions/643765/creating-ext4-partition-from-console).
