@@ -49,6 +49,10 @@ Want electrum?
 
     ansible-playbook electrum.yml -i pi
 
+Want to disable SSH login? Warning: make sure you are able to log in using a ssh key, or else you won't be able to log in remotely.
+
+    ansible-playbook secure.yml -i pi
+
 # Others
 
 ## USB Auto Mount
