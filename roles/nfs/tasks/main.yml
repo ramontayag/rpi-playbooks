@@ -1,0 +1,25 @@
+---
+- name: Install required packages
+  apt: name={{item}} state=present
+  sudo: True
+  with_items:
+    - libcups2
+    - samba
+    - samba-common
+    - samba-common-bin
+
+- name: Ensure folder to share exists
+  shell: mkdir -m 1777 -p {{dir}}
+  sudo: True
+
+- name: Turn on user logins for Samba
+  template: src=smb.conf.j2 dest=/etc/samba/smb.conf
+  sudo: True
+  notify:
+    - restart samba
+
+- name: Create user
+  shell: (echo {{smbpassword}}; echo {{smbpassword}}) | smbpasswd -a pi -s
+  sudo: True
+  notify:
+    - restart samba

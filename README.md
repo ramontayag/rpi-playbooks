@@ -53,6 +53,10 @@ Want to disable SSH login? Warning: make sure you are able to log in using a ssh
 
     ansible-playbook secure.yml -i pi
 
+Want NFS folders? Here we create an NFS folder on `/media/storage`, with username `pi` with password specified below:
+
+    ansible-playbook nfs.yml -i --extra-vars="dir=/media/storage/share smbpassword=yoursmbpassword"
+
 # Others
 
 ## USB Auto Mount

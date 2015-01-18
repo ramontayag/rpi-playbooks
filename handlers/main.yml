@@ -2,3 +2,7 @@
 - name: reload monit
   service: name=monit state=reloaded
   sudo: True
+
+- name: restart samba
+  service: name=samba state=restarted
+  sudo: True
