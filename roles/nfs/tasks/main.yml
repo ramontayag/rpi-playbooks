@@ -7,6 +7,8 @@
     - samba
     - samba-common
     - samba-common-bin
+    - avahi-daemon
+    - avahi-utils
 
 - name: Ensure folder to share exists
   shell: mkdir -m 1777 -p {{dir}}
@@ -23,3 +25,9 @@
   sudo: True
   notify:
     - restart samba
+
+- name: Copy avahi config
+  copy: src=avahi.smb.service dest=/etc/avahi/services/smb.service
+  sudo: True
+  notify:
+    - restart avahi

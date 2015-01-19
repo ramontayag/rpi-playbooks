@@ -6,3 +6,7 @@
 - name: restart samba
   service: name=samba state=restarted
   sudo: True
+
+- name: restart avahi
+  service: name=avahi-daemon state=restarted
+  sudo: True
