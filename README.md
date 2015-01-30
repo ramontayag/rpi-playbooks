@@ -57,6 +57,19 @@ Want NFS folders? Here we create an NFS folder on `/media/storage`, with usernam
 
     ansible-playbook nfs.yml -i --extra-vars="dir=/media/storage/share smbpassword=yoursmbpassword"
 
+Want a [deluge](http://deluge-torrent.org) bittorrent server?
+
+    ansible-playbook bittorrent.yml -i pi --extra-vars="deluge_username=delugeusername deluge_password=delugepassword download_location=/media/storage/downloads/bittorrent"
+
+In the specified download location, you should set the following in your deluge thin client:
+
+- downloading
+- completed
+- watch
+- torrent-backups
+
+As shown in [this page's](http://www.howtogeek.com/142044/how-to-turn-a-raspberry-pi-into-an-always-on-bittorrent-box/) "Configuring Your Download Location" section.
+
 # Others
 
 ## USB Auto Mount

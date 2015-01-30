@@ -1,0 +1,66 @@
+---
+- name: Install required packages
+  apt: name={{item}} state=present
+  sudo: True
+  with_items:
+    - deluged
+    - deluge-console
+    - deluge-web
+
+- name: Create deluge user script
+  template: dest=/etc/default/deluge-daemon src=default-deluge-daemon.j2
+  sudo: True
+
+- name: Create deluge init script
+  template: dest=/etc/init.d/deluge-daemon src=init-deluge-daemon.j2 mode=0755
+  sudo: True
+
+- name: Create dirs for deluge to log into
+  file: dest=/var/log/deluge/{{item}} state=directory
+  sudo: True
+  with_items:
+    - daemon
+    - web
+
+- name: Generate deluged config file
+  shell: deluged creates=~/.config/deluge/auth
+  notify:
+    - stop deluged
+
+- name: Rotate deluge logs
+  copy: src=deluge-rotate dest=/etc/logrotate.d/deluge
+  sudo: True
+
+- name: Insert credentials
+  lineinfile: dest={{home_dir}}/.config/deluge/auth regexp="^((?!localclient).)*$" insertafter="^localclient" line="{{deluge_username}}:{{deluge_password}}:10"
+  notify:
+    - restart deluged
+
+- name: Stop deluge to ensure the config file doesn't get overwritten
+  service: name=deluge-daemon state=stopped
+  sudo: True
+
+- name: Allow remote connections
+  lineinfile: 'dest={{home_dir}}//.config/deluge/core.conf regexp="allow_remote" line="  \"allow_remote\": true,"'
+
+- name: Create torrent dirs
+  file: dest={{download_location}}/{{item}} state=directory
+  with_items:
+    - downloading
+    - completed
+    - watch
+    - torrent-backups
+
+- name: Ensure deluge can write into the dirs
+  file: dest={{item}} owner={{ansible_ssh_user}} mode=0755 recurse=yes
+  sudo: True
+  with_items:
+    - /var/log/deluge
+    - "{{download_location}}"
+
+# - name: Set download dir
+#   lineinfile: 'dest={{home_dir}}//.config/deluge/core.conf regexp="download_location" line="  \"download_location\": \"{{download_location}}\","'
+
+- name: Start deluge after setting the config
+  service: name=deluge-daemon state=started
+  sudo: True
