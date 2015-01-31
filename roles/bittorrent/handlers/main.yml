@@ -1,8 +1,2 @@
 ---
-- name: stop deluged
-  service: name=deluge-daemon state=stopped
-  sudo: True
-
-- name: restart deluged
-  service: name=deluge-daemon state=restarted
-  sudo: True
+- include: ../../../handlers/main.yml

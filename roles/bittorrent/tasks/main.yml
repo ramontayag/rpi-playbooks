@@ -58,9 +58,12 @@
     - /var/log/deluge
     - "{{download_location}}"
 
-# - name: Set download dir
-#   lineinfile: 'dest={{home_dir}}//.config/deluge/core.conf regexp="download_location" line="  \"download_location\": \"{{download_location}}\","'
-
 - name: Start deluge after setting the config
   service: name=deluge-daemon state=started
   sudo: True
+
+- name: Monitor deluge with monit
+  template: dest=/etc/monit/conf.d/deluge.monitrc src=monitrc.j2
+  sudo: True
+  notify:
+    - reload monit

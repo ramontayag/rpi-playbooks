@@ -10,3 +10,11 @@
 - name: restart avahi
   service: name=avahi-daemon state=restarted
   sudo: True
+
+- name: stop deluged
+  service: name=deluge-daemon state=stopped
+  sudo: True
+
+- name: restart deluged
+  service: name=deluge-daemon state=restarted
+  sudo: True

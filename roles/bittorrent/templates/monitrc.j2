@@ -1,0 +1,6 @@
+check process deluged with pidfile /var/run/deluged.pid
+  start program = "/bin/bash -c '/etc/init.d/deluge-daemon start'" as uid {{ansible_ssh_user}} and gid {{ansible_ssh_user}}
+  stop program = "/bin/bash -c '/etc/init.d/deluge-daemon stop'"
+  if cpu is greater than 95% for 4 cycles then alert
+  if cpu > 98% for 30 cycles then restart
+  group deluge
