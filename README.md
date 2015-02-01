@@ -51,6 +51,8 @@ You want wifi?
 
 ### NoIP
 
+**Hasn't been tested yet**
+
 Want to install NoIP (no-ip.com)?
 
     ansible-playbook noip.yml -i pi --extra-vars="noip_username=yourusername noip_password=yournoippassword"
