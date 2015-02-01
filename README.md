@@ -73,7 +73,7 @@ Want to disable SSH login? Warning: make sure you are able to log in using a ssh
 
 Want network attached storage? Here we create a folder on `/media/storage`, with username `pi` with password specified below:
 
-    ansible-playbook nfs.yml -i --extra-vars="dir=/media/storage/share smbpassword=yoursmbpassword"
+    ansible-playbook nas.yml -i --extra-vars="dir=/media/storage/share smbpassword=yoursmbpassword"
 
 ### BitTorrent with Deluge
 
