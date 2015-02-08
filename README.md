@@ -90,6 +90,12 @@ In the specified download location, you should set the following in your deluge 
 
 As shown in [this page's](http://www.howtogeek.com/142044/how-to-turn-a-raspberry-pi-into-an-always-on-bittorrent-box/) "Configuring Your Download Location" section.
 
+## Watch Mount
+
+    ansible-playbook mount.yml -i pi --extra-vars="path=/media/storage"
+
+If the mount cannot be detected, it will reboot the system. If you specify a dir that really does not exist, it will keep rebooting. You have 10 cycles (about ~150 seconds -- depends on what monit is configured consider a cycle) to change it before it reboots again.
+
 # Others
 
 ## USB Auto Mount
