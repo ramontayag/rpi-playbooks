@@ -37,6 +37,14 @@ To make the Pi a BTSync back up server:
 
     ansible-playbook backup.yml -i pi --extra-vars="btsync_password=mybtsyncpassword"
 
+### Syncthing Backup Server
+
+To make the Pi a Syncthing backup server:
+
+    ansible-playbook syncthing.yml -i pi
+
+Visit port `8889` on your Pi to see the Web GUI.
+
 ### RVM & Ruby
 
 Want Ruby and RVM?

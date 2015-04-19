@@ -1,0 +1,6 @@
+---
+- hosts: pi
+
+  roles:
+    - nginx
+    - syncthing

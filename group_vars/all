@@ -13,3 +13,10 @@ noip: "/usr/local/bin/noip2"
 noip_conf: /usr/local/etc/no-ip2.conf
 noip_pid: /var/run/noip2.pid
 noip_initd: /etc/init.d/noip
+syncthing_version: v0.10.30
+syncthing_dirname: syncthing-linux-arm-{{syncthing_version}}
+syncthing_filename: "{{syncthing_dirname}}.tar.gz"
+syncthing_src: https://github.com/syncthing/syncthing/releases/download/{{syncthing_version}}/{{syncthing_filename}}
+syncthing_binary: "{{home_dir}}/{{syncthing_dirname}}/syncthing"
+syncthing_pid: "{{home_dir}}/Sync/syncthing.pid"
+syncthing_public_port: 8889

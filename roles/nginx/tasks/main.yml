@@ -1,0 +1,6 @@
+---
+- name: Install nginx
+  apt: name=nginx state=present
+  sudo: True
+  notify:
+    - start nginx

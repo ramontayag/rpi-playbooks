@@ -18,3 +18,11 @@
 - name: restart deluged
   service: name=deluge-daemon state=restarted
   sudo: True
+
+- name: start nginx
+  service: name=nginx state=started
+  sudo: True
+
+- name: reload nginx
+  service: name=nginx state=reloaded
+  sudo: True
