@@ -1,6 +1,6 @@
 check process syncthing with pidfile {{syncthing_pid}}
   start program = "/bin/bash -c '/etc/init.d/syncthing start'" with timeout 6000 seconds
   stop program = "/bin/bash -c '/etc/init.d/syncthing stop'"
-  if failed host 127.0.0.1 port 8080 for 6 cycles then restart
-  if cpu is greater than 90% for 6 cycles then alert
+  if failed host 127.0.0.1 port 8080 for 20 cycles then restart
+  if cpu is greater than 90% for 10 cycles then alert
   if cpu > 95% for 30 cycles then restart
