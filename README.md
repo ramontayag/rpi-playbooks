@@ -16,7 +16,8 @@ In your Pi:
   - Reboot
 - Prepare the Pi for ansible:
 
-    curl -L https://raw.github.com/KitchenSync/raspberry_configuration/master/install.sh | sudo sh
+    sudo apt-get install python2.6-minimal python2.6 python-crypto python-markupsafe python-jinja2 python-paramiko python-pkg-resources python-setuptools python-pip python-yaml
+    sudo pip install ansible
 
 ## Ansible
 
