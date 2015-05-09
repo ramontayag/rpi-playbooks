@@ -1,8 +1,7 @@
 mkdir -p ~/Downloads/btsync
 cd ~/Downloads/btsync
-wget http://download.getsyncapp.com/endpoint/btsync/os/linux-arm/track/stable
-mv stable btsync_arm.tar.gz
-tar zxvf btsync_arm.tar.gz
+wget https://download-cdn.getsyncapp.com/stable/linux-arm/BitTorrent-Sync_arm.tar.gz
+tar zxvf BitTorrent-Sync_arm.tar.gz
 cd ~/Downloads
 mkdir -p ~/local
 mv btsync ~/local
