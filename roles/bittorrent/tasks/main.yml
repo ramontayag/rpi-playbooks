@@ -41,7 +41,7 @@
   sudo: True
 
 - name: Allow remote connections
-  lineinfile: 'dest={{home_dir}}//.config/deluge/core.conf regexp="allow_remote" line="  \"allow_remote\": true,"'
+  lineinfile: 'dest={{home_dir}}/.config/deluge/core.conf regexp="allow_remote" line="  \"allow_remote\": true,"'
 
 - name: Create torrent dirs
   file: dest={{download_location}}/{{item}} state=directory
