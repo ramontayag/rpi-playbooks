@@ -7,3 +7,6 @@
 
 - name: Remove nginx default
   file: path=/etc/nginx/sites-enabled/default state=absent
+  sudo: True
+  notify:
+    - reload nginx
