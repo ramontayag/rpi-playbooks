@@ -3,7 +3,7 @@
   shell: wget {{syncthing_src}} creates={{syncthing_filename}}
 
 - name: Unpack syncthing
-  shell: tar zxf {{syncthing_filename}} creates={{syncthing_filename}}
+  shell: tar zxf {{syncthing_filename}} creates={{syncthing_dirname}}
 
 - name: Setup init.d script
   template: src=initd.sh.j2 dest=/etc/init.d/syncthing mode=0755

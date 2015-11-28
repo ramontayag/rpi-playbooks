@@ -26,3 +26,7 @@
 - name: reload nginx
   service: name=nginx state=reloaded
   sudo: True
+
+- name: restart syncthing
+  service: name=syncthing state=restarted
+  sudo: True
