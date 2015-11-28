@@ -24,6 +24,7 @@ startd() {
       start-stop-daemon -b -o -c $stuser -S -u $stuser -x $DAEMON
 
       pid=$(pgrep -fu $stuser $DAEMON)
+      mkdir -p $HOMEDIR/Sync
       echo $pid > $HOMEDIR/Sync/syncthing.pid
     else
       echo "Couldn't start syncthing for $stuser (no $config found)"
