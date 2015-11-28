@@ -16,7 +16,7 @@ In your Pi:
   - Reboot
 - Prepare the Pi for ansible:
 
-    sudo apt-get install python2.6-minimal python2.6 python-crypto python-markupsafe python-jinja2 python-paramiko python-pkg-resources python-setuptools python-pip python-yaml
+    sudo apt-get install python3.4-minimal python3.4 python-crypto python-markupsafe python-jinja2 python-paramiko python-pkg-resources python-setuptools python-pip python-yaml -y
     sudo pip install ansible
 
 ## Ansible
