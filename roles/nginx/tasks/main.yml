@@ -4,3 +4,6 @@
   sudo: True
   notify:
     - start nginx
+
+- name: Remove nginx default
+  file: path=/etc/nginx/sites-enabled/default state=absent

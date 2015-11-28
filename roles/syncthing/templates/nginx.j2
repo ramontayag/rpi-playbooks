@@ -1,32 +1,17 @@
 upstream syncthing_upstream {
-  server 127.0.0.1:8080;
+  server 127.0.0.1:{{syncthing_public_port}};
 }
 
 server {
-  listen {{syncthing_public_port}};
-  client_max_body_size 20m;
-  types_hash_max_size 2048;
+  listen 127.0.0.1:80;
 
-  if ($host ~* ^www\.(.*))
-  {
-    set $host_without_www $1;
-    rewrite ^/(.*)$ $scheme://$host_without_www/$1 permanent;
-  }
+  location /syncthing/ {
+    proxy_set_header        Host $host;
+    proxy_set_header        X-Real-IP $remote_addr;
+    proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header        X-Forwarded-Proto $scheme;
 
-  # Look for and serve if exists
-  # 1) maintenance file
-  # 2) the cached file
-  # else continue to @syncthing
-  try_files /system/maintenance.html $uri /cache/$host/$uri.html @syncthing;
-
-  location @syncthing {
     proxy_pass http://syncthing_upstream;
-    proxy_set_header Host $host;
-  }
-
-  error_page   500 502 503 504  /50x.html;
-  location = /50x.html {
-    root html;
   }
 }
 
