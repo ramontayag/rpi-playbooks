@@ -76,7 +76,7 @@ Warning: make sure you are able to log in using a ssh key, or else you won't be 
 
 Here we create a folder on `/media/storage`, with username `pi` with password specified below:
 
-    ansible-playbook nas.yml -i pa --extra-vars="dir=/media/storage/share smbpassword=yoursmbpassword"
+    ansible-playbook nas.yml -i pi --extra-vars="dir=/media/storage/share smbpassword=yoursmbpassword"
 
 ### BitTorrent with Deluge
 
