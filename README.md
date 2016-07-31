@@ -5,7 +5,9 @@
 - Change the inventory IP addresses to your pi address
 - Add your SSH key to the pi (On OSX? You may need `brew install ssh-copy-id`):
 
-    ssh-copy-id -i ~/.ssh/id_rsa.pub pi@ip.address
+```sh
+ssh-copy-id -i ~/.ssh/id_rsa.pub pi@ip.address
+```
 
 ## Configure Pi
 
@@ -16,8 +18,10 @@ In your Pi:
   - Reboot
 - Prepare the Pi for ansible:
 
-    sudo apt-get install python3.4-minimal python3.4 python-crypto python-markupsafe python-jinja2 python-paramiko python-pkg-resources python-setuptools python-pip python-yaml -y
-    sudo pip install ansible
+```sh
+sudo apt-get install python3.4-minimal python3.4 python-crypto python-markupsafe python-jinja2 python-paramiko python-pkg-resources python-setuptools python-pip python-yaml -y
+sudo pip install ansible
+```
 
 ## Ansible
 
@@ -28,7 +32,9 @@ Run the specific role you want. Remember:
 
 First, we have to install the things it needs for the recipes to follow:
 
-    ansible-playbook setup.yml -i pi
+```sh
+ansible-playbook setup.yml -i pi
+```
 
 ## Playbooks
 
@@ -36,53 +42,71 @@ First, we have to install the things it needs for the recipes to follow:
 
 To make the Pi a BTSync back up server:
 
-    ansible-playbook backup.yml -i pi --extra-vars="btsync_password=mybtsyncpassword"
+```sh
+ansible-playbook backup.yml -i pi --extra-vars="btsync_password=mybtsyncpassword"
+```
 
 ### Syncthing Backup Server
 
 To make the Pi a Syncthing backup server:
 
-    ansible-playbook syncthing.yml -i pi
+```sh
+ansible-playbook syncthing.yml -i pi
+```
 
 Visit port `8889` on your Pi to see the Web GUI.
 
 ### RVM & Ruby
 
-    ansible-playbook ruby.yml -i pi
+```sh
+ansible-playbook ruby.yml -i pi
+```
 
 ### Wifi
 
 You want wifi?
 
-    ansible-playbook wifi.yml -i pi --extra-vars="ssid_name=yourssid ssid_password=yourssidpassword"
+```sh
+ansible-playbook wifi.yml -i pi --extra-vars="ssid_name=yourssid ssid_password=yourssidpassword"
+```
 
 ### NoIP (no-ip.com)
 
 **Hasn't been tested yet**
 
-    ansible-playbook noip.yml -i pi --extra-vars="noip_username=yourusername noip_password=yournoippassword"
+```sh
+ansible-playbook noip.yml -i pi --extra-vars="noip_username=yourusername noip_password=yournoippassword"
+```
 
 ### Electrum
 
-    ansible-playbook electrum.yml -i pi
+```sh
+ansible-playbook electrum.yml -i pi
+```
 
 ### Disable SSH login
 
 Warning: make sure you are able to log in using a ssh key, or else you won't be able to log in remotely.
 
-    ansible-playbook secure.yml -i pi
+```sh
+ansible-playbook secure.yml -i pi
+```
 
 ### Samba share
 
 Here we create a folder on `/media/storage`, with username `pi` with password specified below:
 
-    ansible-playbook nas.yml -i pi --extra-vars="dir=/media/storage/share smbpassword=yoursmbpassword"
+```sh
+ansible-playbook nas.yml -i pi --extra-vars="dir=/media/storage/share smbpassword=yoursmbpassword"
+```
 
 ### BitTorrent with Deluge
 
 http://deluge-torrent.org
 
-    ansible-playbook bittorrent.yml -i pi --extra-vars="deluge_username=delugeusername deluge_password=delugepassword download_location=/media/storage/downloads/bittorrent"
+```sh
+ansible-playbook bittorrent.yml -i pi --extra-vars="deluge_username=delugeusername deluge_password=delugepassword download_location=/media/storage/downloads/bittorrent"
+```
 
 In the specified download location, you should set the following in your deluge thin client:
 
@@ -95,7 +119,9 @@ As shown in [this page's](http://www.howtogeek.com/142044/how-to-turn-a-raspberr
 
 ## Watch Mount
 
-    ansible-playbook mount.yml -i pi --extra-vars="path=/media/storage"
+```sh
+ansible-playbook mount.yml -i pi --extra-vars="path=/media/storage"
+```
 
 If the mount cannot be detected, it will reboot the system. If you specify a dir that really does not exist, it will keep rebooting. You have 10 cycles (about ~150 seconds -- depends on what monit is configured consider a cycle) to change it before it reboots again.
 
@@ -107,7 +133,9 @@ _Instructions from [here](http://kwilson.me.uk/blog/force-your-raspberry-pi-to-m
 
 Find out where in `/dev/sd*` your disk is (probably `/dev/sda1`):
 
-    sudo fdisk -l
+```sh
+sudo fdisk -l
+```
 
 You should create the directory where you want it to be mounted: `sudo mkdir /media/storage`
 
