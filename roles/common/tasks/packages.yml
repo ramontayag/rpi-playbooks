@@ -1,15 +1,15 @@
 ---
 - name: update apt cache
   apt: update_cache=yes
-  sudo: True
+  become: True
 
 - name: upgrade apt packages
   apt: upgrade=yes
-  sudo: True
+  become: True
 
 - name: Install required packages
   apt: name={{item}} state=present
-  sudo: True
+  become: True
   with_items:
     - tmux
     - htop

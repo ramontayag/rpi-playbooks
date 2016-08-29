@@ -1,12 +1,12 @@
 ---
 - name: Install nginx
   apt: name=nginx state=present
-  sudo: True
+  become: True
   notify:
     - start nginx
 
 - name: Remove nginx default
   file: path=/etc/nginx/sites-enabled/default state=absent
-  sudo: True
+  become: True
   notify:
     - reload nginx

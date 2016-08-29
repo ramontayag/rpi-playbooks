@@ -13,6 +13,6 @@
 
 - name: Copy monit config
   template: src=btsync.monitrc.j2 dest=/etc/monit/conf.d/btsync.monitrc
-  sudo: True
+  become: True
   notify:
     - reload monit

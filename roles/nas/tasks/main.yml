@@ -1,7 +1,7 @@
 ---
 - name: Install required packages
   apt: name={{item}} state=present
-  sudo: True
+  become: True
   with_items:
     - libcups2
     - samba
@@ -12,22 +12,22 @@
 
 - name: Ensure folder to share exists
   shell: mkdir -m 1777 -p {{dir}}
-  sudo: True
+  become: True
 
 - name: Turn on user logins for Samba
   template: src=smb.conf.j2 dest=/etc/samba/smb.conf
-  sudo: True
+  become: True
   notify:
     - restart samba
 
 - name: Create user
   shell: (echo {{smbpassword}}; echo {{smbpassword}}) | smbpasswd -a pi -s
-  sudo: True
+  become: True
   notify:
     - restart samba
 
 - name: Copy avahi config
   copy: src=avahi.smb.service dest=/etc/avahi/services/smb.service
-  sudo: True
+  become: True
   notify:
     - restart avahi

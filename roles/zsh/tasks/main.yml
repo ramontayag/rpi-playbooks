@@ -1,7 +1,7 @@
 ---
 - name: install required apt packages
   apt: name={{item}} state=present
-  sudo: True
+  become: True
   with_items:
     - tmux
     - zsh
@@ -14,11 +14,11 @@
   shell: 'echo $SHELL'
   register: default_shell
   changed_when: False
-  sudo: no
+  become: no
 
 - name: make zsh default
   user: name={{ansible_ssh_user}} shell=/bin/zsh
-  sudo: True
+  become: True
 
 - name: copy zsh files
   shell: ln -s {{home_dir}}/.zprezto/runcoms/{{item}} {{home_dir}}/.{{item}} creates={{home_dir}}/.{{item}}

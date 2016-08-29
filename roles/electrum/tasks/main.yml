@@ -1,11 +1,11 @@
 ---
 - name: Install Electrum deps
   apt: name={{item}} state=present
-  sudo: True
+  become: True
   with_items:
     - python-qt4
     - python-pip
 
 - name: Install Electrum
   pip: name='https://download.electrum.org/Electrum-{{electrum_version}}.tar.gz'
-  sudo: True
+  become: True

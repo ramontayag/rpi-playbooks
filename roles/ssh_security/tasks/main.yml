@@ -1,4 +1,4 @@
 ---
 - name: Disable password login via SSH
   lineinfile: dest=/etc/ssh/sshd_config regexp=^#?PasswordAuthentication line="PasswordAuthentication no"
-  sudo: True
+  become: True

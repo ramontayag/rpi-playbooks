@@ -1,6 +1,6 @@
 ---
 - name: Monitor mount
   template: src=monitrc.j2 dest=/etc/monit/conf.d/storage_mount.monitrc
-  sudo: True
+  become: True
   notify:
     - reload monit

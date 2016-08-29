@@ -7,22 +7,22 @@
 
 - name: Setup init.d script
   template: src=initd.sh.j2 dest=/etc/init.d/syncthing mode=0755
-  sudo: True
+  become: True
 
 - name: Copy monitrc
   template: src=syncthing.monitrc.j2 dest=/etc/monit/conf.d/syncthing.monitrc
-  sudo: True
+  become: True
   notify:
     - reload monit
 
 - name: Copy syncthing nginx config
   template: src=nginx.j2 dest=/etc/nginx/sites-available/syncthing
-  sudo: True
+  become: True
   notify:
     - reload nginx
 
 - name: Link syncthing nginx config to expose it
   file: src=/etc/nginx/sites-available/syncthing dest=/etc/nginx/sites-enabled/syncthing state=link
-  sudo: True
+  become: True
   notify:
     - reload nginx

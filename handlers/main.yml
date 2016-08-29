@@ -1,32 +1,32 @@
 ---
 - name: reload monit
   service: name=monit state=reloaded
-  sudo: True
+  become: True
 
 - name: restart samba
   service: name=samba state=restarted
-  sudo: True
+  become: True
 
 - name: restart avahi
   service: name=avahi-daemon state=restarted
-  sudo: True
+  become: True
 
 - name: stop deluged
   service: name=deluge-daemon state=stopped
-  sudo: True
+  become: True
 
 - name: restart deluged
   service: name=deluge-daemon state=restarted
-  sudo: True
+  become: True
 
 - name: start nginx
   service: name=nginx state=started
-  sudo: True
+  become: True
 
 - name: reload nginx
   service: name=nginx state=reloaded
-  sudo: True
+  become: True
 
 - name: restart syncthing
   service: name=syncthing state=restarted
-  sudo: True
+  become: True
