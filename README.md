@@ -1,5 +1,10 @@
 # Usage
 
+It looks like the new version of Raspbian do not have SSH enabled. This is probably for the better - people won't accidentally leave the port open with the default password `raspberry`. However, it makes it a little harder to get your Pi setup because you'll need a monitor and a keyboard.
+
+- Before we start, boot up your Pi, and in `sudo raspi-config`, navigate to Advanced Options and enable SSH.
+- While you're there, we might as well expand the filesystem. In the main menu, expand the filesystem.
+
 ## On host
 
 - Change the inventory IP addresses to your pi address
@@ -9,14 +14,11 @@
 ssh-copy-id -i ~/.ssh/id_rsa.pub pi@ip.address
 ```
 
+Here on, you can do the following remotely.
+
 ## Configure Pi
 
-In your Pi:
-
-- Run `sudo raspi-config` (does not seem to be a way to do this automatically)
-  - Expand Filesystem
-  - Reboot
-- Prepare the Pi for ansible:
+SSH into your pi.
 
 ```sh
 sudo apt-get install python3.4-minimal python3.4 python-crypto python-markupsafe python-jinja2 python-paramiko python-pkg-resources python-setuptools python-pip python-yaml -y
