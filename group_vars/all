@@ -20,4 +20,4 @@ syncthing_src: https://github.com/syncthing/syncthing/releases/download/{{syncth
 syncthing_binary: "{{home_dir}}/{{syncthing_dirname}}/syncthing"
 syncthing_pid: "{{home_dir}}/Sync/syncthing.pid"
 syncthing_public_port: 8889
-electrum_version: 2.0.4
+electrum_version: 2.7.12

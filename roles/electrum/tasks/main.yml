@@ -7,5 +7,5 @@
     - python-pip
 
 - name: Install Electrum
-  pip: name='https://download.electrum.org/Electrum-{{electrum_version}}.tar.gz'
+  pip: name="https://download.electrum.org/{{electrum_version}}/Electrum-{{electrum_version}}.tar.gz"
   become: True
