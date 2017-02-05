@@ -21,6 +21,7 @@ Here on, you can do the following remotely.
 SSH into your pi.
 
 ```sh
+sudo apt-get update
 sudo apt-get install python3.4-minimal python3.4 python-crypto python-markupsafe python-jinja2 python-paramiko python-pkg-resources python-setuptools python-pip python-yaml -y
 sudo pip install ansible
 ```
