@@ -5,5 +5,12 @@
   notify:
     - reload monit
 
+- name: Copy systemd config
+  copy: src=monit.service dest=/lib/systemd/system/monit.service
+  become: True
+
 - name: Start monit on boot
-  service: name=monit runlevel=3,4,5 state=started
+  systemd:
+    name: monit
+    state: started
+  become: True

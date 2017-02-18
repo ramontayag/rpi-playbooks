@@ -1,28 +1,17 @@
 ---
-- name: Download syncthing
-  shell: wget {{syncthing_src}} creates={{syncthing_filename}}
-
-- name: Unpack syncthing
-  shell: tar zxf {{syncthing_filename}} creates={{syncthing_dirname}}
-
-- name: Setup init.d script
-  template: src=initd.sh.j2 dest=/etc/init.d/syncthing mode=0755
-  become: True
-
-- name: Copy monitrc
-  template: src=syncthing.monitrc.j2 dest=/etc/monit/conf.d/syncthing.monitrc
-  become: True
-  notify:
-    - reload monit
-
-- name: Copy syncthing nginx config
-  template: src=nginx.j2 dest=/etc/nginx/sites-available/syncthing
-  become: True
-  notify:
-    - reload nginx
-
-- name: Link syncthing nginx config to expose it
-  file: src=/etc/nginx/sites-available/syncthing dest=/etc/nginx/sites-enabled/syncthing state=link
-  become: True
-  notify:
-    - reload nginx
+- name: Run syncthing container
+  docker_container:
+    name: syncthing
+    image: funkyfuture/rpi-syncthing:{{syncthing_version}}
+    ports:
+      - "8384:8384"
+      - "22000:22000"
+      - "21205:21205/udp"
+    volumes:
+      - /home/pi/syncthing/config:/syncthing/config
+      - /home/pi/syncthing/data:/syncthing/data
+    restart: yes
+    restart_policy: always
+    network_mode: host
+    env:
+      GUI_ADDRESS: "[::]:{{syncthing_public_port}}"

@@ -49,6 +49,14 @@ To make the Pi a BTSync back up server:
 ansible-playbook backup.yml -i pi --extra-vars="btsync_password=mybtsyncpassword"
 ```
 
+### Docker
+
+To be able to run Docker:
+
+```sh
+ansible-playbook docker.yml -i pi
+```
+
 ### Syncthing Backup Server
 
 To make the Pi a Syncthing backup server:

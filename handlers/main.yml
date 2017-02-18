@@ -1,6 +1,8 @@
 ---
 - name: reload monit
-  service: name=monit state=reloaded
+  systemd:
+    name: monit
+    state: reloaded
   become: True
 
 - name: restart samba
@@ -25,8 +27,4 @@
 
 - name: reload nginx
   service: name=nginx state=reloaded
-  become: True
-
-- name: restart syncthing
-  service: name=syncthing state=restarted
   become: True
