@@ -1,19 +1,13 @@
 # Usage
 
-NOTE: I'm currently moving these playbooks to use Docker whenever possible and wise. See progress in the [hypriot_compat](https://github.com/ramontayag/rpi-playbooks/tree/hypriot_compat) branch.
-
-It looks like the new version of Raspbian do not have SSH enabled. This is probably for the better - people won't accidentally leave the port open with the default password `raspberry`. However, it makes it a little harder to get your Pi setup because you'll need a monitor and a keyboard.
-
-- Before we start, boot up your Pi, and in `sudo raspi-config`, navigate to Advanced Options and enable SSH.
-- While you're there, we might as well expand the filesystem. In the main menu, expand the filesystem.
+This is meant to be used with a Pi on [Hypriot](http://hypriot.com). Installing it with their tool, [flash](https://github.com/hypriot/flash), is pretty simple.
 
 ## On host
 
-- Change the inventory IP addresses to your pi address
-- Add your SSH key to the pi (On OSX? You may need `brew install ssh-copy-id`):
+Add your SSH key to the pi (On OSX? You may need `brew install ssh-copy-id`):
 
 ```sh
-ssh-copy-id -i ~/.ssh/id_rsa.pub pi@ip.address
+ssh-copy-id -i ~/.ssh/id_rsa.pub pirate@ip.address
 ```
 
 Here on, you can do the following remotely.
@@ -23,9 +17,9 @@ Here on, you can do the following remotely.
 SSH into your pi.
 
 ```sh
-sudo apt-get update
-sudo apt-get install python3.4-minimal python3.4 python-crypto python-markupsafe python-jinja2 python-paramiko python-pkg-resources python-setuptools python-pip python-yaml -y
-sudo pip install ansible
+sudo apt-get update && \
+  sudo apt-get install python3.4-minimal python3.4 python-crypto python-markupsafe python-jinja2 python-paramiko python-pkg-resources python-setuptools python-pip python-yaml -y && \
+  sudo pip install ansible
 ```
 
 ## Ansible
@@ -43,20 +37,20 @@ ansible-playbook setup.yml -i pi
 
 ## Playbooks
 
+### TMUX
+
+To install tmux with an opinionated `tmux.conf` (see `roles/tmux/files/tmux.conf`):
+
+```sh
+ansible-playbook tmux.yml -i pi
+```
+
 ### BitTorrent Sync Backup Server
 
 To make the Pi a BTSync back up server:
 
 ```sh
 ansible-playbook backup.yml -i pi --extra-vars="btsync_password=mybtsyncpassword"
-```
-
-### Docker
-
-To be able to run Docker:
-
-```sh
-ansible-playbook docker.yml -i pi
 ```
 
 ### Syncthing Backup Server
@@ -142,7 +136,9 @@ If the mount cannot be detected, it will reboot the system. If you specify a dir
 
 ## USB Auto Mount
 
-_Instructions from [here](http://kwilson.me.uk/blog/force-your-raspberry-pi-to-mount-an-external-usb-drive-every-time-it-starts-up/)_
+It seems that using systemd to mount the USB caused me less boot issues. The old way of using autofs caused issues where the Pi would get stuck at boot.
+
+See [this](http://serverfault.com/a/804212/63376) for instructions.
 
 Find out where in `/dev/sd*` your disk is (probably `/dev/sda1`):
 

@@ -1,4 +1,10 @@
 ---
+- name: Install required packages
+  apt:
+    name: monit
+    state: present
+  become: True
+
 - name: Copy monit config
   copy: src=monitrc dest=/etc/monit/monitrc
   become: True

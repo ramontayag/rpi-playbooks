@@ -8,8 +8,8 @@
       - "22000:22000"
       - "21205:21205/udp"
     volumes:
-      - /home/pi/syncthing/config:/syncthing/config
-      - /home/pi/syncthing/data:/syncthing/data
+      - "{{syncthing_config_dir}}:/syncthing/config"
+      - "{{syncthing_data_dir}}:/syncthing/data"
     restart: yes
     restart_policy: always
     network_mode: host

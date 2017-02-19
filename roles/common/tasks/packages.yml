@@ -1,21 +1,34 @@
 ---
+- name: Enable other packages
+  lineinfile:
+    dest: /etc/apt/sources.list
+    regexp: '^# deb-src'
+    line: "deb-src http://archive.raspbian.org/raspbian/ jessie main contrib non-free rpi"
+  become: True
+
 - name: update apt cache
-  apt: update_cache=yes
+  apt:
+    update_cache: yes
   become: True
 
 - name: upgrade apt packages
-  apt: upgrade=yes
+  apt:
+    upgrade: yes
   become: True
 
 - name: Install required packages
-  apt: name={{item}} state=present
+  apt:
+    name: "{{item}}"
+    state: present
   become: True
   with_items:
-    - tmux
     - htop
     - vim
     - git-core
-    - raspberrypi-bootloader
-    - monit
     - expect
     - nmap
+
+- name: Install docker-py
+  pip:
+    name: docker-py
+  become: True
