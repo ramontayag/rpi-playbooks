@@ -142,6 +142,12 @@ sudo fdisk -l
 
 You should create the directory where you want it to be mounted: `sudo mkdir /media/storage`
 
+You'll add something like this to `/etc/fstab`:
+
+```
+/dev/sda1 /media/storage auto noauto,x-systemd.automount 0 0
+```
+
 ## Format disk
 
 If you need format the drive, see [this](http://superuser.com/questions/643765/creating-ext4-partition-from-console).
