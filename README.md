@@ -91,7 +91,7 @@ ansible-playbook noip.yml -i pi --extra-vars="noip_username=yourusername noip_pa
 ansible-playbook electrum.yml -i pi
 ```
 
-### Disable SSH login
+### Disable SSH Password Login
 
 Warning: make sure you are able to log in using a ssh key, or else you won't be able to log in remotely.
 
