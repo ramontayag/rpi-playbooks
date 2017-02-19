@@ -101,6 +101,14 @@ Here we create a folder on `/media/storage`, with username `pi` with password sp
 ansible-playbook nas.yml -i pi --extra-vars="dir=/media/storage/share smbpassword=yoursmbpassword"
 ```
 
+### NFS (Server)
+
+Copy `roles/nfs-server/files/exports.sample` to `roles/nfs-server/files/exports` and export what you want to be shared to the network.
+
+```sh
+ansible-playbook nfs-server.yml -i pi
+```
+
 ### BitTorrent with Deluge
 
 http://deluge-torrent.org

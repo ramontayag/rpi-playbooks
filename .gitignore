@@ -1,4 +1,5 @@
 *.sw[po]
 pi
 roles/**/env.sample
+roles/nfs-server/files/exports
 *.retry
