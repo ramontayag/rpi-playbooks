@@ -1,5 +1,7 @@
 # Usage
 
+NOTE: I'm currently moving these playbooks to use Docker whenever possible and wise. See progress in the [hypriot_compat](https://github.com/ramontayag/rpi-playbooks/tree/hypriot_compat) branch.
+
 It looks like the new version of Raspbian do not have SSH enabled. This is probably for the better - people won't accidentally leave the port open with the default password `raspberry`. However, it makes it a little harder to get your Pi setup because you'll need a monitor and a keyboard.
 
 - Before we start, boot up your Pi, and in `sudo raspi-config`, navigate to Advanced Options and enable SSH.
