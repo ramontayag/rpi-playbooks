@@ -13,7 +13,7 @@ noip: "/usr/local/bin/noip2"
 noip_conf: /usr/local/etc/no-ip2.conf
 noip_pid: /var/run/noip2.pid
 noip_initd: /etc/init.d/noip
-syncthing_version: 0.14.23
+syncthing_version: 0.14.24
 syncthing_public_port: 8384
 syncthing_dir: "{{home_dir}}/syncthing"
 syncthing_config_dir: "{{syncthing_dir}}/config"
