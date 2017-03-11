@@ -58,7 +58,7 @@ ansible-playbook backup.yml -i pi --extra-vars="btsync_password=mybtsyncpassword
 To make the Pi a Syncthing backup server:
 
 ```sh
-ansible-playbook syncthing.yml -i pi
+ansible-playbook syncthing.yml -i pi --extra-vars="syncthing_username=admin syncthing_password=123456"
 ```
 
 Visit port `8889` on your Pi to see the Web GUI.

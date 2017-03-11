@@ -15,3 +15,5 @@
     network_mode: host
     env:
       GUI_ADDRESS: "[::]:{{syncthing_public_port}}"
+      GUI_USERNAME: "{{syncthing_username}}"
+      GUI_PASSWORD_PLAIN: "{{syncthing_password}}"
