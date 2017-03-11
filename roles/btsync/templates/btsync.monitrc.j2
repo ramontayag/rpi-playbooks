@@ -1,6 +1,0 @@
-check process btsync with pidfile {{btsync_pid}}
-  start program = "/bin/bash -c '{{btsync_dir}}/btsync --config {{btsync_conf}}'" as uid {{ansible_ssh_user}} and gid {{ansible_ssh_user}}
-  stop program = "/bin/bash -c '/bin/kill -9 `cat {{btsync_pid}}`'"
-  if failed host 127.0.0.1 port 8888 then restart
-  if cpu is greater than 90% for 2 cycles then alert
-  if cpu > 95% for 30 cycles then restart

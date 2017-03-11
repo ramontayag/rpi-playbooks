@@ -45,14 +45,6 @@ To install tmux with an opinionated `tmux.conf` (see `roles/tmux/files/tmux.conf
 ansible-playbook tmux.yml -i pi
 ```
 
-### BitTorrent Sync Backup Server
-
-To make the Pi a BTSync back up server:
-
-```sh
-ansible-playbook backup.yml -i pi --extra-vars="btsync_password=mybtsyncpassword"
-```
-
 ### Syncthing Backup Server
 
 To make the Pi a Syncthing backup server:
