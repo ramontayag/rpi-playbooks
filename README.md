@@ -53,7 +53,8 @@ To make the Pi a Syncthing backup server:
 ansible-playbook syncthing.yml -i pi --extra-vars="syncthing_username=admin syncthing_password=123456"
 ```
 
-Visit port `8889` on your Pi to see the Web GUI.
+- visit port `8384` on your Pi to see the Web GUI
+- The data dir can be found at `/syncthing/data`
 
 ### RVM & Ruby
 
