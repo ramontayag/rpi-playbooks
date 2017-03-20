@@ -102,6 +102,18 @@ Copy `roles/nfs-server/files/exports.sample` to `roles/nfs-server/files/exports`
 ansible-playbook nfs-server.yml -i pi
 ```
 
+If you have other RPis that will be cliets, you can run:
+
+```sh
+ansible-playbook nfs-client.yml -i pi
+```
+
+To mount on fstab, add something like this:
+
+```
+192.168.1.121:/path/on/server   /path/on/local     nfs     noauto,x-systemd.automount,x-systemd.device-timeout=10,timeo=14,hard,intr,noatime    0 0
+```
+
 ### BitTorrent with Deluge
 
 http://deluge-torrent.org
