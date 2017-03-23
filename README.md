@@ -118,18 +118,15 @@ To mount on fstab, add something like this:
 
 http://deluge-torrent.org
 
+Docker image: https://github.com/linuxserver/docker-deluge
+
 ```sh
-ansible-playbook bittorrent.yml -i pi --extra-vars="deluge_username=delugeusername deluge_password=delugepassword download_location=/media/storage/downloads/bittorrent"
+ansible-playbook bittorrent.yml -i pi --extra-vars="deluge_config_dir=/media/storage/deluge/config deluge_download_dir=/media/storage/downloads/bittorrent deluge_timezone=Hong\ Kong"
 ```
 
-In the specified download location, you should set the following in your deluge thin client:
+Visit `ip.of.pi:8112`. Username and password are `admin`/`deluge`.
 
-- downloading
-- completed
-- watch
-- torrent-backups
-
-As shown in [this page's](http://www.howtogeek.com/142044/how-to-turn-a-raspberry-pi-into-an-always-on-bittorrent-box/) "Configuring Your Download Location" section.
+It seems that despite setting the `deluge_download_dir`, you still have to go to the preferences and set the download folder to `/downloads`.
 
 ## Watch Mount
 

@@ -1,69 +1,15 @@
 ---
-- name: Install required packages
-  apt: name={{item}} state=present
-  become: True
-  with_items:
-    - deluged
-    - deluge-console
-    - deluge-web
-
-- name: Create deluge user script
-  template: dest=/etc/default/deluge-daemon src=default-deluge-daemon.j2
-  become: True
-
-- name: Create deluge init script
-  template: dest=/etc/init.d/deluge-daemon src=init-deluge-daemon.j2 mode=0755
-  become: True
-
-- name: Create dirs for deluge to log into
-  file: dest=/var/log/deluge/{{item}} state=directory
-  become: True
-  with_items:
-    - daemon
-    - web
-
-- name: Generate deluged config file
-  shell: deluged creates=~/.config/deluge/auth
-  notify:
-    - stop deluged
-
-- name: Rotate deluge logs
-  copy: src=deluge-rotate dest=/etc/logrotate.d/deluge
-  become: True
-
-- name: Insert credentials
-  lineinfile: dest={{home_dir}}/.config/deluge/auth regexp="^((?!localclient).)*$" insertafter="^localclient" line="{{deluge_username}}:{{deluge_password}}:10"
-  notify:
-    - restart deluged
-
-- name: Stop deluge to ensure the config file doesn't get overwritten
-  service: name=deluge-daemon state=stopped
-  become: True
-
-- name: Allow remote connections
-  lineinfile: 'dest={{home_dir}}/.config/deluge/core.conf regexp="allow_remote" line="  \"allow_remote\": true,"'
-
-- name: Create torrent dirs
-  file: dest={{download_location}}/{{item}} state=directory
-  with_items:
-    - downloading
-    - completed
-    - watch
-    - torrent-backups
-
-- name: Ensure deluge can write into the dirs
-  file: dest={{item}} owner={{ansible_ssh_user}} mode=0755 recurse=yes
-  become: True
-  with_items:
-    - /var/log/deluge
-    - "{{download_location}}"
-
-- name: Start deluge after setting the config
-  service: name=deluge-daemon state=started
-  become: True
-
-- name: Monitor deluge with monit
-  template: dest=/etc/monit/conf.d/deluge.monitrc src=monitrc.j2
-  become: True
-  notify:
-    - reload monit
+- name: Run deluge container
+  docker_container:
+    name: deluge
+    image: lsioarmhf/deluge:{{deluge_image_version}}
+    volumes:
+      - "{{deluge_download_dir}}:/downloads"
+      - "{{deluge_config_dir}}:/config"
+    restart: yes
+    restart_policy: always
+    network_mode: host
+    env:
+      TZ: Hong Kong
+      PUID: 1000
+      PGID: 1000
