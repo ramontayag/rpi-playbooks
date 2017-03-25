@@ -18,4 +18,3 @@ syncthing_version: 0.14.25
 syncthing_public_port: 8384
 syncthing_dir: "{{home_dir}}/syncthing"
 syncthing_config_dir: "{{syncthing_dir}}/config"
-syncthing_data_dir: "/media/storage/syncthing"

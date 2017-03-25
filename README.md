@@ -50,7 +50,7 @@ ansible-playbook tmux.yml -i pi
 To make the Pi a Syncthing backup server:
 
 ```sh
-ansible-playbook syncthing.yml -i pi --extra-vars="syncthing_username=admin syncthing_password=123456"
+ansible-playbook syncthing.yml -i pi --extra-vars="syncthing_username=admin syncthing_password=123456 syncthing_data_dir=/media/syncthing/test"
 ```
 
 - visit port `8384` on your Pi to see the Web GUI
