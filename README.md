@@ -2,6 +2,8 @@
 
 This is meant to be used with a Pi on [Hypriot](http://hypriot.com). Installing it with their tool, [flash](https://github.com/hypriot/flash), is pretty simple.
 
+It has been tested only on Hypriot 1.9.
+
 ## On host
 
 Add your SSH key to the pi (On OSX? You may need `brew install ssh-copy-id`):
@@ -54,7 +56,7 @@ ansible-playbook syncthing.yml -i pi --extra-vars="syncthing_username=admin sync
 ```
 
 - visit port `8384` on your Pi to see the Web GUI
-- The data dir can be found at `/syncthing/data`
+- When adding directories, the data dir can be found at `/syncthing/data`
 
 ### RVM & Ruby
 

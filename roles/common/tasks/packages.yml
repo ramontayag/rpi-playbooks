@@ -3,18 +3,14 @@
   lineinfile:
     dest: /etc/apt/sources.list
     regexp: '^# deb-src'
-    line: "deb-src http://archive.raspbian.org/raspbian/ jessie main contrib non-free rpi"
+    line: "deb-src http://raspbian.raspberrypi.org/raspbian/ stretch main contrib non-free rpi"
   become: True
 
-- name: update apt cache
-  apt:
-    update_cache: yes
-  become: True
-
-- name: upgrade apt packages
+- name: Update and upgrade apt packages
+  become: true
   apt:
     upgrade: yes
-  become: True
+    update_cache: yes
 
 - name: Install required packages
   apt:
@@ -25,10 +21,8 @@
     - htop
     - vim
     - git-core
-    - expect
-    - nmap
 
-- name: Install docker-py
+- name: Install docker
   pip:
-    name: docker-py
+    name: docker
   become: True
