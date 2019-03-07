@@ -2,4 +2,4 @@
 - hosts: pi
 
   roles:
-    - docker
+    - tmux

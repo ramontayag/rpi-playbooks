@@ -1,21 +1,28 @@
 ---
-- name: update apt cache
-  apt: update_cache=yes
+- name: Enable other packages
+  lineinfile:
+    dest: /etc/apt/sources.list
+    regexp: '^# deb-src'
+    line: "deb-src http://raspbian.raspberrypi.org/raspbian/ stretch main contrib non-free rpi"
   become: True
 
-- name: upgrade apt packages
-  apt: upgrade=yes
-  become: True
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    upgrade: yes
+    update_cache: yes
 
 - name: Install required packages
-  apt: name={{item}} state=present
+  apt:
+    name: "{{item}}"
+    state: present
   become: True
   with_items:
-    - tmux
     - htop
     - vim
     - git-core
-    - raspberrypi-bootloader
-    - monit
-    - expect
-    - nmap
+
+- name: Install docker
+  pip:
+    name: docker
+  become: True

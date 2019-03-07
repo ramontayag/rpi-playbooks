@@ -1,5 +1,5 @@
 ---
-ansible_ssh_user: pi
+ansible_ssh_user: pirate
 home_dir: /home/{{ansible_ssh_user}}
 btsync_dir: "{{home_dir}}/local/btsync"
 btsync_pid: "{{btsync_dir}}/btsync.pid"
@@ -13,11 +13,8 @@ noip: "/usr/local/bin/noip2"
 noip_conf: /usr/local/etc/no-ip2.conf
 noip_pid: /var/run/noip2.pid
 noip_initd: /etc/init.d/noip
-syncthing_version: 0.14.23
-syncthing_dirname: syncthing-linux-arm-{{syncthing_version}}
-syncthing_filename: "{{syncthing_dirname}}.tar.gz"
-syncthing_src: https://github.com/syncthing/syncthing/releases/download/{{syncthing_version}}/{{syncthing_filename}}
-syncthing_binary: "{{home_dir}}/{{syncthing_dirname}}/syncthing"
-syncthing_pid: "{{home_dir}}/Sync/syncthing.pid"
+deluge_image_version: 46
+syncthing_version: 1.1.0
 syncthing_public_port: 8384
-electrum_version: 2.7.12
+syncthing_dir: "{{home_dir}}/syncthing"
+syncthing_config_dir: "{{syncthing_dir}}/config"

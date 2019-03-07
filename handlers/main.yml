@@ -28,3 +28,15 @@
 - name: reload nginx
   service: name=nginx state=reloaded
   become: True
+
+- name: restart rpcbind
+  systemd:
+    name: rpcbind
+    state: restarted
+  become: True
+
+- name: restart nfs-kernel-server
+  systemd:
+    name: nfs-kernel-server
+    state: restarted
+  become: True

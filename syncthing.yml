@@ -1,5 +1,5 @@
 ---
-- hosts: pi
+- hosts: syncthing
 
   roles:
     - syncthing

@@ -1,19 +1,15 @@
 # Usage
 
-NOTE: I'm currently moving these playbooks to use Docker whenever possible and wise. See progress in the [hypriot_compat](https://github.com/ramontayag/rpi-playbooks/tree/hypriot_compat) branch.
+This is meant to be used with a Pi on [Hypriot](http://hypriot.com). Installing it with their tool, [flash](https://github.com/hypriot/flash), is pretty simple.
 
-It looks like the new version of Raspbian do not have SSH enabled. This is probably for the better - people won't accidentally leave the port open with the default password `raspberry`. However, it makes it a little harder to get your Pi setup because you'll need a monitor and a keyboard.
-
-- Before we start, boot up your Pi, and in `sudo raspi-config`, navigate to Advanced Options and enable SSH.
-- While you're there, we might as well expand the filesystem. In the main menu, expand the filesystem.
+It has been tested only on Hypriot 1.9.
 
 ## On host
 
-- Change the inventory IP addresses to your pi address
-- Add your SSH key to the pi (On OSX? You may need `brew install ssh-copy-id`):
+Add your SSH key to the pi (On OSX? You may need `brew install ssh-copy-id`):
 
 ```sh
-ssh-copy-id -i ~/.ssh/id_rsa.pub pi@ip.address
+ssh-copy-id -i ~/.ssh/id_rsa.pub pirate@ip.address
 ```
 
 Here on, you can do the following remotely.
@@ -23,9 +19,9 @@ Here on, you can do the following remotely.
 SSH into your pi.
 
 ```sh
-sudo apt-get update
-sudo apt-get install python3.4-minimal python3.4 python-crypto python-markupsafe python-jinja2 python-paramiko python-pkg-resources python-setuptools python-pip python-yaml -y
-sudo pip install ansible
+sudo apt-get update && \
+  sudo apt-get install python3.4-minimal python3.4 python-crypto python-markupsafe python-jinja2 python-paramiko python-pkg-resources python-setuptools python-pip python-yaml -y && \
+  sudo pip install ansible
 ```
 
 ## Ansible
@@ -43,20 +39,12 @@ ansible-playbook setup.yml -i pi
 
 ## Playbooks
 
-### BitTorrent Sync Backup Server
+### TMUX
 
-To make the Pi a BTSync back up server:
-
-```sh
-ansible-playbook backup.yml -i pi --extra-vars="btsync_password=mybtsyncpassword"
-```
-
-### Docker
-
-To be able to run Docker:
+To install tmux with an opinionated `tmux.conf` (see `roles/tmux/files/tmux.conf`):
 
 ```sh
-ansible-playbook docker.yml -i pi
+ansible-playbook tmux.yml -i pi
 ```
 
 ### Syncthing Backup Server
@@ -64,10 +52,11 @@ ansible-playbook docker.yml -i pi
 To make the Pi a Syncthing backup server:
 
 ```sh
-ansible-playbook syncthing.yml -i pi
+ansible-playbook syncthing.yml -i pi --extra-vars="syncthing_username=admin syncthing_password=123456 syncthing_data_dir=/media/syncthing/test"
 ```
 
-Visit port `8889` on your Pi to see the Web GUI.
+- visit port `8384` on your Pi to see the Web GUI
+- When adding directories, the data dir can be found at `/syncthing/data`
 
 ### RVM & Ruby
 
@@ -91,13 +80,7 @@ ansible-playbook wifi.yml -i pi --extra-vars="ssid_name=yourssid ssid_password=y
 ansible-playbook noip.yml -i pi --extra-vars="noip_username=yourusername noip_password=yournoippassword"
 ```
 
-### Electrum
-
-```sh
-ansible-playbook electrum.yml -i pi
-```
-
-### Disable SSH login
+### Disable SSH Password Login
 
 Warning: make sure you are able to log in using a ssh key, or else you won't be able to log in remotely.
 
@@ -113,22 +96,39 @@ Here we create a folder on `/media/storage`, with username `pi` with password sp
 ansible-playbook nas.yml -i pi --extra-vars="dir=/media/storage/share smbpassword=yoursmbpassword"
 ```
 
+### NFS (Server)
+
+Copy `roles/nfs-server/files/exports.sample` to `roles/nfs-server/files/exports` and export what you want to be shared to the network.
+
+```sh
+ansible-playbook nfs-server.yml -i pi
+```
+
+If you have other RPis that will be cliets, you can run:
+
+```sh
+ansible-playbook nfs-client.yml -i pi
+```
+
+To mount on fstab, add something like this:
+
+```
+192.168.1.121:/path/on/server   /path/on/local     nfs     noauto,x-systemd.automount,x-systemd.device-timeout=10,timeo=14,hard,intr,noatime    0 0
+```
+
 ### BitTorrent with Deluge
 
 http://deluge-torrent.org
 
+Docker image: https://github.com/linuxserver/docker-deluge
+
 ```sh
-ansible-playbook bittorrent.yml -i pi --extra-vars="deluge_username=delugeusername deluge_password=delugepassword download_location=/media/storage/downloads/bittorrent"
+ansible-playbook bittorrent.yml -i pi --extra-vars="deluge_config_dir=/media/storage/deluge/config deluge_download_dir=/media/storage/downloads/bittorrent deluge_timezone=Hong\ Kong"
 ```
 
-In the specified download location, you should set the following in your deluge thin client:
+Visit `ip.of.pi:8112`. Username and password are `admin`/`deluge`.
 
-- downloading
-- completed
-- watch
-- torrent-backups
-
-As shown in [this page's](http://www.howtogeek.com/142044/how-to-turn-a-raspberry-pi-into-an-always-on-bittorrent-box/) "Configuring Your Download Location" section.
+It seems that despite setting the `deluge_download_dir`, you still have to go to the preferences and set the download folder to `/downloads`.
 
 ## Watch Mount
 
@@ -142,7 +142,9 @@ If the mount cannot be detected, it will reboot the system. If you specify a dir
 
 ## USB Auto Mount
 
-_Instructions from [here](http://kwilson.me.uk/blog/force-your-raspberry-pi-to-mount-an-external-usb-drive-every-time-it-starts-up/)_
+It seems that using systemd to mount the USB caused me less boot issues. The old way of using autofs caused issues where the Pi would get stuck at boot.
+
+See [this](http://serverfault.com/a/804212/63376) for instructions.
 
 Find out where in `/dev/sd*` your disk is (probably `/dev/sda1`):
 
@@ -151,6 +153,12 @@ sudo fdisk -l
 ```
 
 You should create the directory where you want it to be mounted: `sudo mkdir /media/storage`
+
+You'll add something like this to `/etc/fstab`:
+
+```
+/dev/sda1 /media/storage auto noauto,x-systemd.automount 0 0
+```
 
 ## Format disk
 
