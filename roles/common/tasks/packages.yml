@@ -24,4 +24,5 @@
 - name: Install docker
   pip:
     name: docker
+    state: latest
   become: yes
