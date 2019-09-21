@@ -2,7 +2,7 @@
 - name: Run syncthing container
   docker_container:
     name: syncthing
-    image: funkyfuture/rpi-syncthing:{{syncthing_version}}
+    image: ramontayag/docker-rpi-syncthing:{{syncthing_version}}
     ports:
       - "8384:8384"
       - "22000:22000"
@@ -14,6 +14,6 @@
     restart_policy: always
     network_mode: host
     env:
-      GUI_ADDRESS: "[::]:{{syncthing_public_port}}"
+      GUI_ADDRESS: "0.0.0.0:{{syncthing_public_port}}"
       GUI_USERNAME: "{{syncthing_username}}"
       GUI_PASSWORD_PLAIN: "{{syncthing_password}}"

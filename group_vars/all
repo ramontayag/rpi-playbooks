@@ -14,7 +14,7 @@ noip_conf: /usr/local/etc/no-ip2.conf
 noip_pid: /var/run/noip2.pid
 noip_initd: /etc/init.d/noip
 deluge_image_version: 46
-syncthing_version: 1.1.0
+syncthing_version: v1.2.2.0
 syncthing_public_port: 8384
 syncthing_dir: "{{home_dir}}/syncthing"
 syncthing_config_dir: "{{syncthing_dir}}/config"
