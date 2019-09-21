@@ -4,4 +4,4 @@
     dest: /etc/ssh/sshd_config
     regexp: ^#?PasswordAuthentication
     line: "PasswordAuthentication no"
-  become: True
+  become: yes

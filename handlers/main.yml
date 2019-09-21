@@ -3,40 +3,40 @@
   systemd:
     name: monit
     state: reloaded
-  become: True
+  become: yes
 
 - name: restart samba
   service: name=samba state=restarted
-  become: True
+  become: yes
 
 - name: restart avahi
   service: name=avahi-daemon state=restarted
-  become: True
+  become: yes
 
 - name: stop deluged
   service: name=deluge-daemon state=stopped
-  become: True
+  become: yes
 
 - name: restart deluged
   service: name=deluge-daemon state=restarted
-  become: True
+  become: yes
 
 - name: start nginx
   service: name=nginx state=started
-  become: True
+  become: yes
 
 - name: reload nginx
   service: name=nginx state=reloaded
-  become: True
+  become: yes
 
 - name: restart rpcbind
   systemd:
     name: rpcbind
     state: restarted
-  become: True
+  become: yes
 
 - name: restart nfs-kernel-server
   systemd:
     name: nfs-kernel-server
     state: restarted
-  become: True
+  become: yes

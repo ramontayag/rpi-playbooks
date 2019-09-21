@@ -3,6 +3,6 @@
   template:
     src: monitrc.j2
     dest: /etc/monit/conf.d/storage_mount.monitrc
-  become: True
+  become: yes
   notify:
     - reload monit

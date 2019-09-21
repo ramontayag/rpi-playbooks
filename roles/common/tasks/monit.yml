@@ -3,20 +3,20 @@
   apt:
     name: monit
     state: present
-  become: True
+  become: yes
 
 - name: Copy monit config
   copy: src=monitrc dest=/etc/monit/monitrc
-  become: True
+  become: yes
   notify:
     - reload monit
 
 - name: Copy systemd config
   copy: src=monit.service dest=/lib/systemd/system/monit.service
-  become: True
+  become: yes
 
 - name: Start monit on boot
   systemd:
     name: monit
     state: started
-  become: True
+  become: yes

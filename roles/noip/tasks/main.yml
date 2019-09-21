@@ -4,14 +4,14 @@
 
 - name: Install noip
   shell: ./noip_install.sh creates={{noip_conf}}
-  sudo: True
+  sudo: yes
 
 - name: Install noip init.d
   template: src=initd.j2 dest={{noip_initd}} mode=0700
-  sudo: True
+  sudo: yes
 
 - name: Copy monit config
   template: src=noip2.monitrc.j2 dest=/etc/monit/conf.d/noip2.monitrc
-  sudo: True
+  sudo: yes
   notify:
     - reload monit

@@ -1,11 +1,12 @@
 ---
 - name: install required apt packages
-  apt: name={{item}} state=present
-  become: True
-  with_items:
-    - tmux
-    - zsh
-    - git
+  apt:
+    name:
+      - tmux
+      - zsh
+      - git
+    state: present
+  become: yes
 
 - name: clone prezto
   shell: git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto" creates="{{home_dir}}/.zprezto"
@@ -18,7 +19,7 @@
 
 - name: make zsh default
   user: name={{ansible_ssh_user}} shell=/bin/zsh
-  become: True
+  become: yes
 
 - name: copy zsh files
   shell: ln -s {{home_dir}}/.zprezto/runcoms/{{item}} {{home_dir}}/.{{item}} creates={{home_dir}}/.{{item}}

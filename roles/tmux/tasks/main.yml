@@ -3,7 +3,7 @@
   apt:
     name: tmux
     state: present
-  become: True
+  become: yes
 
 - name: Copy tmux config
   copy:

@@ -4,25 +4,24 @@
     dest: /etc/apt/sources.list
     regexp: '^# deb-src'
     line: "deb-src http://raspbian.raspberrypi.org/raspbian/ stretch main contrib non-free rpi"
-  become: True
+  become: yes
 
 - name: Update and upgrade apt packages
-  become: true
+  become: yes
   apt:
     upgrade: yes
     update_cache: yes
 
 - name: Install required packages
   apt:
-    name: "{{item}}"
+    name:
+      - htop
+      - vim
+      - git-core
     state: present
-  become: True
-  with_items:
-    - htop
-    - vim
-    - git-core
+  become: yes
 
 - name: Install docker
   pip:
     name: docker
-  become: True
+  become: yes

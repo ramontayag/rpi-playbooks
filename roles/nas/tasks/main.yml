@@ -1,33 +1,34 @@
 ---
 - name: Install required packages
-  apt: name={{item}} state=present
-  become: True
-  with_items:
-    - libcups2
-    - samba
-    - samba-common
-    - samba-common-bin
-    - avahi-daemon
-    - avahi-utils
+  apt:
+    name:
+      - libcups2
+      - samba
+      - samba-common
+      - samba-common-bin
+      - avahi-daemon
+      - avahi-utils
+    state: present
+  become: yes
 
 - name: Ensure folder to share exists
   shell: mkdir -m 1777 -p {{dir}}
-  become: True
+  become: yes
 
 - name: Turn on user logins for Samba
   template: src=smb.conf.j2 dest=/etc/samba/smb.conf
-  become: True
+  become: yes
   notify:
     - restart samba
 
 - name: Create user
   shell: (echo {{smbpassword}}; echo {{smbpassword}}) | smbpasswd -a pi -s
-  become: True
+  become: yes
   notify:
     - restart samba
 
 - name: Copy avahi config
   copy: src=avahi.smb.service dest=/etc/avahi/services/smb.service
-  become: True
+  become: yes
   notify:
     - restart avahi
