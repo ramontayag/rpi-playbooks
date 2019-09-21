@@ -105,7 +105,7 @@ Copy `roles/nfs-server/files/exports.sample` to `roles/nfs-server/files/exports`
 ansible-playbook nfs-server.yml -i pi
 ```
 
-If you have other RPis that will be cliets, you can run:
+If you have other RPis that will be clients, you can run:
 
 ```sh
 ansible-playbook nfs-client.yml -i pi
