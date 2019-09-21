@@ -99,16 +99,16 @@ ansible-playbook nas.yml -i pi --extra-vars="dir=/media/storage/share smbpasswor
 
 ### NFS (Server)
 
-Copy `roles/nfs-server/files/exports.sample` to `roles/nfs-server/files/exports` and export what you want to be shared to the network.
+Copy `roles/nfs_server/files/exports.sample` to `roles/nfs_server/files/exports` and export what you want to be shared to the network.
 
 ```sh
-ansible-playbook nfs-server.yml -i pi
+ansible-playbook nfs_server.yml -i pi
 ```
 
 If you have other RPis that will be clients, you can run:
 
 ```sh
-ansible-playbook nfs-client.yml -i pi
+ansible-playbook nfs_client.yml -i pi
 ```
 
 To mount on fstab, add something like this:

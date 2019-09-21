@@ -1,5 +1,5 @@
 ---
-- hosts: nfs-clients
+- hosts: nfs_clients
 
   roles:
-    - nfs-client
+    - nfs_client

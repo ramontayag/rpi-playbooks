@@ -2,4 +2,4 @@
 - hosts: nfs
 
   roles:
-    - nfs-server
+    - nfs_server

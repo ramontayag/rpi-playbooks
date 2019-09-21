@@ -1,11 +1,10 @@
 ---
 - name: Install required packages
   apt:
-    name: "{{item}}"
+    name:
+      - rpcbind
+      - nfs-common
     state: present
-  with_items:
-    - rpcbind
-    - nfs-common
-  become: True
+  become: yes
   notify:
     - restart rpcbind

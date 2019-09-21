@@ -1,12 +1,11 @@
 ---
 - name: Install required packages
   apt:
-    name: "{{item}}"
+    name:
+      - rpcbind
+      - nfs-kernel-server
     state: present
-  with_items:
-    - rpcbind
-    - nfs-kernel-server
-  become: True
+  become: yes
 
 - name: Copy /etc/exports
   copy:
@@ -15,4 +14,4 @@
   notify:
     - restart rpcbind
     - restart nfs-kernel-server
-  become: True
+  become: yes
