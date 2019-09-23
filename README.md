@@ -20,9 +20,8 @@ SSH into your pi.
 
 ```sh
 sudo apt-get update -yqq && \
-  sudo apt-get install python3.7-minimal python3.7 python-crypto python-markupsafe python-jinja2 python-paramiko python-pkg-resources python-setuptools python-pip python-yaml -y && \
-  sudo pip install --upgrade pip && \
-  sudo pip install ansible
+  sudo apt-get install locales-all python3-pip -y && \
+  sudo pip3 install ansible
 ```
 
 ## Ansible
@@ -37,6 +36,8 @@ First, we have to install the things it needs for the recipes to follow:
 ```sh
 ansible-playbook setup.yml -i pi
 ```
+
+**You may need to restart the Pis after this.** I noticed I was not able to access the internet.
 
 ## Playbooks
 
