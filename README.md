@@ -21,7 +21,7 @@ SSH into your pi.
 ```sh
 sudo apt-get update -yqq && \
   sudo apt-get install locales-all python3-pip -y && \
-  sudo pip3 install ansible
+  sudo pip3 install setuptools ansible
 ```
 
 ## Ansible
