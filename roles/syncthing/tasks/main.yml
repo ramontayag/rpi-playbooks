@@ -2,11 +2,7 @@
 - name: Run syncthing container
   docker_container:
     name: syncthing
-    image: ramontayag/docker-rpi-syncthing:{{syncthing_version}}
-    ports:
-      - "8384:8384"
-      - "22000:22000"
-      - "21205:21205/udp"
+    image: funkyfuture/rpi-syncthing:{{syncthing_version}}
     volumes:
       - "{{syncthing_config_dir}}:/syncthing/config"
       - "{{syncthing_data_dir}}:/syncthing/data"
