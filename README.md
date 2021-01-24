@@ -19,6 +19,8 @@ Here on, you can do the following remotely.
 SSH into your pi.
 
 ```sh
+sudo apt-get clean && \
+sudo apt-get upgrade && \
 sudo apt-get update -yqq && \
   sudo apt-get install locales-all python3-pip -y && \
   sudo pip3 install setuptools ansible
