@@ -56,12 +56,11 @@ ansible-playbook tmux.yml -i pi
 To make the Pi a Syncthing backup server:
 
 ```sh
-ansible-playbook syncthing.yml -i pi --extra-vars="syncthing_username=admin syncthing_password=123456 syncthing_data_dir=/media/storage/syncthing"
+ansible-playbook syncthing.yml -i pi
 ```
 
 - visit port `8384` on your Pi to see the Web GUI
-- When adding directories, the data dir can be found at `/syncthing/data`
-- Syncthing's files will be saved in thost at `/media/storage/syncthing`
+- When adding directories, the data dir can be found at your host's `syncthing_dir`
 - ensure `pi` has `[syncthing]` defined with the ip of the pi that will run it
 
 ### RVM & Ruby
